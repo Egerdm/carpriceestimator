@@ -1,0 +1,173 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Car Price Prediction</title>
+    <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+    <link href="style.css" rel="stylesheet" type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='./bootstrap.min.css') }}">
+    <link href="./bootstrap.min.css" rel="stylesheet">
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</head>
+
+<nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+    <div class="container">
+      <a class="navbar-brand mr-4" href="/">Flask Blog</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarToggle">
+        <div class="navbar-nav mr-auto">
+          <a class="nav-item nav-link" href="/">Home</a>
+          <a class="nav-item nav-link" href="/about">About</a>
+        </div>
+        <!-- Navbar Right Side -->
+        <div class="navbar-nav">
+          <a class="nav-item nav-link" href="/login">Login</a>
+          <a class="nav-item nav-link" href="/register">Contact Us</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+
+<body>
+    <img class="blue-gradient" src="{{ url_for('static', filename='/Gradient.png') }}">
+    <div class="container">
+        <div class="login">
+            <h1 class="title">Car Price Prediction</h1>
+            <h3 class="description"> Enter the following values to predict the price of your vehicle</h3>
+
+            <div class="form-wrappper">
+                <img src="{{ url_for('static', filename='/car1.png') }}">
+                <!-- Main Input For Receiving Query to our ML -->
+                <form action="{{ url_for('predict')}}" method="post">
+
+                    <div class="form-floating mb-3">
+                        <select class="form-select" id="floatingSelect_Brand" aria-label="Floating label select example" name= "Brand" method="GET" action="/">
+                            
+                            {% for brand in brands %}
+                            <option value= "{{brand}}" >{{brand}}</option>"
+                            {% endfor %}
+                        </select>
+                        <label for="floatingSelect_Brand">Brand</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <select class="form-select" id="floatingSelect_Serie" aria-label="Floating label select example" name= "Serie" method="GET" action="/">
+                            
+                            {% for serie in series %}
+                            <option value= "{{serie}}" >{{serie}}</option>"
+                            {% endfor %}
+                        </select>
+                        <label for="floatingSelect_Serie">Serie</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <select class="form-select" id="floatingSelect_Color" aria-label="Floating label select example" name= "Color" method="GET" action="/">
+                            
+                            {% for color in colors %}
+                            <option value= "{{color}}" >{{color}}</option>"
+                            {% endfor %}
+                        </select>
+                        <label for="floatingSelect_Color">Color</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" name ="Year" class="form-control" id="floatingYear" placeholder="Year"
+                            required="required">
+                        <label for="floatingYear">Year</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" name="KM" class="form-control" id="floatingKM" placeholder="KM" required="required">
+                        <label for="floatingKM">KM</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" name="HP" class="form-control" id="floatingHP" placeholder="HP" required="required">
+                        <label for="floatingHP">HP</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" name="CC" class="form-control" id="floatingCC" placeholder="CC" required="required">
+                        <label for="floatingCC">CC</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <select class="form-select" id="floatingDealership" aria-label="Floating label select example" name= "Galeriden" method="GET" action="/">
+                            <option value= "1" SELECTED>Yes</option>
+                            <option value= "0" >No</option>
+                        </select>
+                        <label for="floatingDealership">Dealership</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <select class="form-select" id="floatingWarranty" aria-label="Floating label select example" name= "GARANTI" method="GET" action="/">
+                            <option value= "1" SELECTED>Yes</option>
+                            <option value= "0" >No</option>
+                        </select>
+                        <label for="floatingWarranty">Warranty</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <select class="form-select" id="floatingDriveType" aria-label="Floating label select example" name= "CEKIS" method="GET" action="/">
+                            <option value= "4ceker" SELECTED> 4WD </option>
+                            <option value= "Arkadan" >RWD (Rear) </option>
+                            <option value= "Onden" >FWD (Front) </option>
+
+                        </select>
+                        <label for="floatingDriveType">Drive Type</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <select class="form-select" id="floatingGearType" aria-label="Floating label select example" name= "Gear" method="GET" action="/">
+                            <option value= "Otomatik" SELECTED> Auto </option>
+                            <option value= "Duz" > Manuel </option>
+                            <option value= "Yarı" > Semi-Auto </option>
+                        </select>
+                        <label for="floatingGearType">Gear Type</label>
+                    </div>
+                    
+                    <div class="form-floating mb-3">
+                        <select class="form-select" id="floatingFuelType" aria-label="Floating label select example" name= "Fuel" method="GET" action="/">
+                            <option value= "Benzin" SELECTED>Gasoline</option>
+                            <option value= "Dizel" >Diesel</option>
+                            <option value= "LPG" >LPG</option>
+                        </select>
+                        <label for="floatingFuelType">Fuel</label>
+                    </div>
+                    <div class="submit-wrapper">
+                        <button data-toggle="modal" data-target="#exampleModal" id ="submit_btn" type="submit"
+                            class="btn btn-success submit-button">Predict</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Prediction result</h5>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {{ prediction_text }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button"  class="btn btn-secondary"  data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./bootstrap.bundle.min.js">
+    </script>
+   <script>
+
+
+   </script>
+</body>
+
+</html>

@@ -1,0 +1,84 @@
+html {
+  height: 100%;
+
+  background: black;
+}
+body {
+  height: 100%;
+  background: black !important;
+  display: flex;
+  justify-content: center;
+}
+.blue-gradient {
+  position: absolute;
+  top: -20%;
+  left: -20%;
+  z-index: 0;
+}
+.title {
+  margin-top: 32px;
+  color: white;
+  font-weight: 700;
+  text-align: center;
+}
+.description {
+  color: #565d80;
+  font-size: medium;
+  font-weight: 400;
+  text-align: center;
+}
+.body .container {
+  height: 100%;
+  display: flex;
+  z-index: 5;
+  background: black;
+  color: white;
+  flex-direction: column;
+  justify-content: center;
+}
+.body .container .login {
+  background: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.form-wrappper {
+  display: flex;
+  justify-content: space-between;
+}
+.form-wrappper img {
+  width: 30%;
+  height: auto;
+  object-fit: contain;
+}
+form {
+  background: black;
+  display: flex;
+  flex-wrap: wrap;
+  width: 60%;
+  justify-content: space-between;
+  margin-top: 32px;
+}
+
+form .form-floating {
+  width: 45%;
+  margin-right: 32px;
+}
+
+form .submit-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+form .submit-wrapper .submit-button {
+  padding: 16px 64px;
+  border-radius: 20px;
+  font-size: larger;
+  font-weight: 600;
+  transition: all 0.2s ease-in-out;
+}
+form .submit-wrapper .submit-button:hover {
+  background-color: rgb(75, 75, 75);
+  transform: scale(1.1);
+}
